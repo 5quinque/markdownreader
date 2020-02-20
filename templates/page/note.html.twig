@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ directory ~ '/' ~ note }}{% endblock %}
+
+{% block body %}
+<style>
+    .wrapper { margin: 1em auto; }
+</style>
+
+<div class="wrapper">
+    <h1>{{ directory ~ '/' ~ note }}</h1>
+    <hr> 
+    <p>
+        {{ markdown|markdown_to_html }} 
+    </p>
+</div>
+{% endblock %}
