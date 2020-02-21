@@ -1,7 +1,8 @@
-<ul class="vertical menu {% if nested is defined %}nested{% endif %}">
+<ul class="navigation {% if nested is defined %}nested{% endif %}">
 {% if nested is not defined %}
     {% set nested = true %}
 {% endif %}
+
 {% for key,value in files %}
     {% if value is iterable %}
         {% if path is defined %}
@@ -10,7 +11,7 @@
         {% else %}
             {% set path = key %}
         {% endif %}
-        <li><a href="#">+{{ key }}/</a></li>
+        <li>{{ key }}/</li>
         {% set files = value %}
         {{ include('page/_navigation.html.twig') }}
         {% if oldpath is defined %}

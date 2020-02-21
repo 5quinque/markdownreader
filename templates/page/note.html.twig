@@ -5,13 +5,24 @@
 {% block body %}
 <style>
     .wrapper { margin: 1em auto; }
+
+.markdown h1 {
+    font-size: 1.8rem;
+    border-bottom: 1px solid #cacaca;
+}
+.markdown h2 {
+    font-size: 1.6rem;
+}
+.markdown h3 {
+    font-size: 1.4rem;
+}
+
+
 </style>
 
 <div class="wrapper">
-    <h1>{{ directory ~ '/' ~ note }}</h1>
-    <hr> 
-    <p>
+    <div class="markdown">
         {{ markdown|markdown_to_html }} 
-    </p>
+    </div>
 </div>
 {% endblock %}

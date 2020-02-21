@@ -3,38 +3,104 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
         {% block stylesheets %}{% endblock %}
         <style>
-.menu {
-    background: 
-    #eee;
+.container {
+    max-width: 100%;
 }
+
+.navigation {
+    background: #f5f5ff;
+    list-style: none;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    flex-wrap: wrap;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+}
+
+.menu li, .menu li button {
+    margin: 0;
+}
+
+.top-bar {
+    background-color: #eee;
+    width: 50%;
+    padding: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    display: flex;
+}
+
+.top-bar-left {
+-webkit-box-flex: 1;
+    flex: 1 1 auto;
+    margin-right: auto;
+}
+.top-bar-right {
+-webkit-box-flex: 0;
+    flex: 0 1 auto;
+    margin-left: auto;
+}
+
+.top-bar input {
+    max-width: 200px;
+    margin: 0;
+    margin-right: 1rem;
+    display: inline-block;
+}
+
+code {
+    white-space: pre-line;
+}
+
+.left2rem {
+    margin-left: -2rem !important;
+
 </style>
     </head>
     <body>
-<div class="top-bar">
-  <div class="top-bar-left">
-    <ul class="menu simple">
-      <li class="menu-text"><a href="{{ path('index') }}">Notes</a></li>
-    </ul>
-  </div>
-  <div class="top-bar-right">
-    <ul class="menu">
-      <li><input type="search" placeholder="Search"></li>
-      <li><button type="button" class="button">Search</button></li>
-    </ul>
-  </div>
+<div class="container">
+
+<!--
+<div class="row">
+    <div class="top-bar">
+        <div class="top-bar-left">
+          <a href="{{ path('index') }}">Notes</a>
+        </div>
+        <div class="top-bar-right">
+          <ul class="menu">
+            <li><input type="search" placeholder="Search"></li>
+            <li><button type="button" class="button">Search</button></li>
+            </ul>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="row">
+<div class="column left2rem">
+    {{ include('page/_navigation.html.twig') }}
 </div>
 
-<div class="grid-x grid-margin-x">
-  <div class="cell shrink">
-    {{ include('page/_navigation.html.twig') }}
-  </div>
-  <div class="cell auto">
+<div class="column column-80">
     {% block body %}{% endblock %}
-  </div>
 </div>
+
+</div>
+</div>
+
 
         {% block javascripts %}{% endblock %}
     </body>
