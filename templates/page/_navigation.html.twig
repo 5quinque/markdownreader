@@ -1,4 +1,4 @@
-<ul class="navigation {% if nested is defined %}nested{% endif %}">
+<ul class="navigation {% if nested is defined %}nested{% else %}padding-left-1rem{% endif %}">
 {% if nested is not defined %}
     {% set nested = true %}
 {% endif %}
