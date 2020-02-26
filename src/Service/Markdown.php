@@ -1,7 +1,7 @@
 <?php
 namespace App\Service;
 
-class GetMarkdown
+class Markdown
 {
     private $markdownDirectory;
 
@@ -10,6 +10,8 @@ class GetMarkdown
         $this->markdownDirectory = $_ENV['MARKDOWN_DIRECTORY'];
 
         $this->files = $this->listAll($this->markdownDirectory);
+
+        // [TODO] Find '.git' without hardcoding path.. 
         unset($this->files['notes']['.git']);
     }
 

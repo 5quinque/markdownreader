@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\GetMarkdown;
+use App\Service\Markdown;
 
 class PageController extends AbstractController
 {
@@ -13,7 +13,7 @@ class PageController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(GetMarkdown $md)
+    public function index(Markdown $md)
     {
         $files = $md->files;
         return $this->render('page/index.html.twig', ['files' => $files]);
@@ -22,7 +22,7 @@ class PageController extends AbstractController
     /**
      * @Route("/{directory}/{note}", name="note", requirements={"directory"=".+"})
      */
-    public function note(string $directory, string $note, GetMarkdown $md)
+    public function note(string $directory, string $note, Markdown $md)
     {
         $markdown = $md->LoadMarkdown($directory, $note);
         $files = $md->files;
