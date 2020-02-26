@@ -11,8 +11,7 @@ class Markdown
 
         $this->files = $this->listAll($this->markdownDirectory);
 
-        // [TODO] Find '.git' without hardcoding path.. 
-        unset($this->files['notes']['.git']);
+        $this->files = $this->removeHidden($this->files);
     }
 
     public function LoadMarkdown(string $directory, string $file)
@@ -54,4 +53,24 @@ class Markdown
 
         return $result;
     }
+
+    public function removeHidden(array $array): array
+    {
+        foreach ($array as $key => $value) {
+            if (preg_match('/^\./', $key)) { // Remove hidden directory
+                unset($array[$key]);
+                continue;
+            }
+            if (is_array($array[$key])) { // Recuse through directories
+                $array[$key] = $this->removeHidden($array[$key]);
+            } else if (preg_match('/^\./', $value)) { // Remove hidden file
+                unset($array[$key]);
+                continue;
+            }
+
+        }
+
+        return $array;
+    }
+
 }
