@@ -14,7 +14,7 @@ class Markdown
         $this->files = $this->removeHidden($this->files);
     }
 
-    public function LoadMarkdown(string $directory, string $file)
+    public function loadMarkdown(string $directory, string $file)
     {
         $directory = preg_replace('/\/..\//', '\/', $directory);
 
@@ -26,6 +26,13 @@ class Markdown
             return file_get_contents("{$this->markdownDirectory}/$directory/$file.md");
         } else {
             return false;
+        }
+    }
+
+    public function loadImage(string $path)
+    {
+        if (file_exists("{$this->markdownDirectory}/$path")) {
+            return file_get_contents("{$this->markdownDirectory}/$path");
         }
     }
 
