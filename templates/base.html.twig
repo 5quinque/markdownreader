@@ -77,6 +77,13 @@ code {
     padding-left: 1rem;
 }
 
+.collapse.show {
+    display: block;
+}
+.collapse {
+    display: none;
+}
+
 </style>
     </head>
     <body>
@@ -91,5 +98,17 @@ code {
             </div>
         </div>
         {% block javascripts %}{% endblock %}
+<script>
+function handleNavClick(event) {
+    if (event.target.textContent.match(/^\n?-/)) {
+        event.target.textContent = event.target.textContent.replace(/^\n?-/, '+');
+    } else {
+        event.target.textContent = event.target.textContent.replace(/^\n?\+/, '-');
+    }
+
+    let target = event.target.dataset.target.replace('#', '');
+    document.getElementById(target).classList.toggle("show");
+}
+</script>
     </body>
 </html>
