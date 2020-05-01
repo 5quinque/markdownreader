@@ -18,6 +18,9 @@ class PageController extends AbstractController
     public function index(Markdown $md)
     {
         $files = $md->files;
+
+        $md->findIndex();
+
         return $this->render('page/index.html.twig', ['files' => $files]);
     }
 

@@ -14,6 +14,21 @@ class Markdown
         $this->files = $this->removeHidden($this->files);
     }
 
+    public function findIndex()
+    {
+        //$cdir = $this->removeHidden(scandir($this->markdownDirectory));
+
+        foreach($this->files as $key => $value) {
+            if ($value == "index.md") {
+              dump($key, $value);
+              break;
+            }
+            dump([$key, $value]);
+        }
+
+        //dump($cdir);
+    }
+
     public function loadMarkdown(string $directory, string $file)
     {
         $directory = preg_replace('/\/..\//', '\/', $directory);
