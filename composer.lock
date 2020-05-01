@@ -1831,6 +1831,7 @@
         },
         {
             "name": "symfony/http-foundation",
+<<<<<<< HEAD
             "version": "v5.0.8",
             "source": {
                 "type": "git",
@@ -1841,6 +1842,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-foundation/zipball/e47fdf8b24edc12022ba52923150ec6484d7f57d",
                 "reference": "e47fdf8b24edc12022ba52923150ec6484d7f57d",
+=======
+            "version": "v5.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-foundation.git",
+                "reference": "26fb006a2c7b6cdd23d52157b05f8414ffa417b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/26fb006a2c7b6cdd23d52157b05f8414ffa417b6",
+                "reference": "26fb006a2c7b6cdd23d52157b05f8414ffa417b6",
+>>>>>>> 0e19eb2c3a54b1a49c2d44a582915a6eefd191e3
                 "shasum": ""
             },
             "require": {
@@ -1882,7 +1895,11 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2020-04-18T20:50:06+00:00"
+=======
+            "time": "2020-03-30T14:14:32+00:00"
+>>>>>>> 0e19eb2c3a54b1a49c2d44a582915a6eefd191e3
         },
         {
             "name": "symfony/http-kernel",
@@ -2041,6 +2058,7 @@
         },
         {
             "name": "symfony/mime",
+<<<<<<< HEAD
             "version": "v5.0.8",
             "source": {
                 "type": "git",
@@ -2051,6 +2069,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/mime/zipball/5d6c81c39225a750f3f43bee15f03093fb9aaa0b",
                 "reference": "5d6c81c39225a750f3f43bee15f03093fb9aaa0b",
+=======
+            "version": "v5.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/mime.git",
+                "reference": "481b7d6da88922fb1e0d86a943987722b08f3955"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/481b7d6da88922fb1e0d86a943987722b08f3955",
+                "reference": "481b7d6da88922fb1e0d86a943987722b08f3955",
+>>>>>>> 0e19eb2c3a54b1a49c2d44a582915a6eefd191e3
                 "shasum": ""
             },
             "require": {
@@ -2099,7 +2129,11 @@
                 "mime",
                 "mime-type"
             ],
+<<<<<<< HEAD
             "time": "2020-04-17T03:29:44+00:00"
+=======
+            "time": "2020-03-27T16:56:45+00:00"
+>>>>>>> 0e19eb2c3a54b1a49c2d44a582915a6eefd191e3
         },
         {
             "name": "symfony/monolog-bridge",
