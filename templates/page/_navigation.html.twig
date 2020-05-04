@@ -27,7 +27,7 @@
             {% set path = oldpath %} 
         {% endif %}
     {% else %}
-      <li><a href="{{ path('note', {'directory': path, 'note' : value|replace({('.md') : ''}) }) }}">{{ value|replace({('.md') : ''}) }}</a></li>
+      <li><a href="{{ path('note', {'directory': path, 'note' : value }) }}">{{ value }}</a></li>
     {% endif %}
 {% endfor %}
 </ul>

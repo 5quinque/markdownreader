@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+// use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\Markdown;
+use App\Service\Search;
 
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,10 +19,22 @@ class PageController extends AbstractController
     public function index(Markdown $md)
     {
         $files = $md->files;
-
         $md->findIndex();
 
         return $this->render('page/index.html.twig', ['files' => $files]);
+    }
+
+    /**
+     * @Route("/search/{searchterm}", name="search")
+     */
+    public function search(Markdown $md, Search $search, string $searchterm)
+    {
+        $files = $md->files;
+        $result = $search->searchTitles($searchterm, $files);
+
+        dump($result);
+
+        return $this->render('page/search.html.twig', ['files' => $files, 'searchterm' => $searchterm]);
     }
 
     /**
@@ -34,11 +47,11 @@ class PageController extends AbstractController
 
         //return new Response($image);
         $response = new Response();
+        // [TODO] png support..
         $response->headers->set('Content-Type', 'image/jpeg');
         $response->setContent($image);
         return $response;
     }
-
 
     /**
      * @Route("/{directory}/{note}", name="note", requirements={"directory"=".+"})
@@ -62,14 +75,4 @@ class PageController extends AbstractController
             'markdown' => $markdown,
         ]);
     }
-
-    ///**
-    // * @Route("/{path}", name="catchall", requirements={"path"=".+"})
-    // */
-    //public function catchImages(string $path)
-    //{
-    //    // if file_exists $filename..
-    //    return $this->redirectToRoute('image', ['filename' => $path]);
-    //    // endif
-    //}
 }

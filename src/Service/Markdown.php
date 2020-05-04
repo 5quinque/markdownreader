@@ -12,16 +12,18 @@ class Markdown
         $this->files = $this->listAll($this->markdownDirectory);
 
         $this->files = $this->removeHidden($this->files);
+
+        dump($this->files);
     }
 
     public function findIndex()
     {
         //$cdir = $this->removeHidden(scandir($this->markdownDirectory));
 
-        foreach($this->files as $key => $value) {
+        foreach ($this->files as $key => $value) {
             if ($value == "index.md") {
-              dump($key, $value);
-              break;
+                dump($key, $value);
+                break;
             }
             dump([$key, $value]);
         }
@@ -62,18 +64,31 @@ class Markdown
 
         $cdir = scandir($dir);
         foreach ($cdir as $key => $value) {
-            if (!in_array($value,array(".",".."))) {
+            if (!in_array($value, array(".",".."))) {
                 if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
                     $result[$value] = $this->listAll($dir . DIRECTORY_SEPARATOR . $value);
                 } else {
-                    if (preg_match('/\.md$/', $value)) {
-                        $result[] = $value;
+                    $markdownFile = $this->isMarkdownFile($value);
+                    if ($markdownFile) {
+                        $result[] = $markdownFile;
                     }
                 }
             }
         }
 
         return $result;
+    }
+
+    private function isMarkdownFile(string $filename)
+    {
+        if (preg_match('/^\./', $filename)) {
+            return false;
+        }
+        if (preg_match('/\.md$/', $filename)) {
+            return preg_replace('/\.md$/', '', $filename);
+        }
+
+        return false;
     }
 
     public function removeHidden(array $array): array
@@ -83,16 +98,14 @@ class Markdown
                 unset($array[$key]);
                 continue;
             }
-            if (is_array($array[$key])) { // Recuse through directories
+            if (is_array($array[$key])) { // Recurse through directories
                 $array[$key] = $this->removeHidden($array[$key]);
-            } else if (preg_match('/^\./', $value)) { // Remove hidden file
+            } elseif (preg_match('/^\./', $value)) { // Remove hidden file
                 unset($array[$key]);
                 continue;
             }
-
         }
 
         return $array;
     }
-
 }
