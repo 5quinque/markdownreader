@@ -19,9 +19,16 @@ class PageController extends AbstractController
     public function index(Markdown $md)
     {
         $files = $md->files;
-        $md->findIndex();
+        $dirPath = $md->findIndex();
 
-        return $this->render('page/index.html.twig', ['files' => $files]);
+        $markdown = $md->loadMarkdown($dirPath[0], $dirPath[1]);
+
+        return $this->render('page/note.html.twig', [
+            'directory' => $dirPath[0],
+            'note' => $dirPath[1],
+            'files' => $files,
+            'markdown' => $markdown,
+        ]);
     }
 
     /**
@@ -45,7 +52,6 @@ class PageController extends AbstractController
         //var_dump($filename);
         $image = $md->loadImage($filename);
 
-        //return new Response($image);
         $response = new Response();
         // [TODO] png support..
         $response->headers->set('Content-Type', 'image/jpeg');

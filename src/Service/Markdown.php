@@ -10,25 +10,24 @@ class Markdown
         $this->markdownDirectory = $_ENV['MARKDOWN_DIRECTORY'];
 
         $this->files = $this->listAll($this->markdownDirectory);
-
-        $this->files = $this->removeHidden($this->files);
-
-        dump($this->files);
     }
 
-    public function findIndex()
+    public function findIndex(array $files = null)
     {
-        //$cdir = $this->removeHidden(scandir($this->markdownDirectory));
-
-        foreach ($this->files as $key => $value) {
-            if ($value == "index.md") {
-                dump($key, $value);
-                break;
-            }
-            dump([$key, $value]);
+        if (is_null($files)) {
+            $files = $this->files;
         }
 
-        //dump($cdir);
+        foreach ($files as $key => $value) {
+            // Only search for the 'index' file one level deep
+            if (is_array($value) && ($files === $this->files)) {
+                return $this->findIndex($value);
+            }
+
+            if ($key == "index") {
+                return [$value, $key];
+            }
+        }
     }
 
     public function loadMarkdown(string $directory, string $file)
@@ -61,17 +60,23 @@ class Markdown
     public function listAll($dir)
     {
         $result = array();
-
         $cdir = scandir($dir);
+        
+        $fullDirectory = str_replace($this->markdownDirectory, '', $dir);
+        $fullDirectory = preg_replace('/^\//', '', $fullDirectory);
+
         foreach ($cdir as $key => $value) {
-            if (!in_array($value, array(".",".."))) {
-                if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
-                    $result[$value] = $this->listAll($dir . DIRECTORY_SEPARATOR . $value);
-                } else {
-                    $markdownFile = $this->isMarkdownFile($value);
-                    if ($markdownFile) {
-                        $result[] = $markdownFile;
-                    }
+            // Skip hidden files and current/parent special names ('.', '..')
+            if (preg_match('/^\./', $value)) {
+                continue;
+            }
+
+            if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
+                $result[$value] = $this->listAll($dir . DIRECTORY_SEPARATOR . $value);
+            } else {
+                $filename = $this->isMarkdownFile($value);
+                if ($filename) {
+                    $result[$filename] = $fullDirectory;
                 }
             }
         }
@@ -81,31 +86,10 @@ class Markdown
 
     private function isMarkdownFile(string $filename)
     {
-        if (preg_match('/^\./', $filename)) {
-            return false;
-        }
         if (preg_match('/\.md$/', $filename)) {
             return preg_replace('/\.md$/', '', $filename);
         }
 
         return false;
-    }
-
-    public function removeHidden(array $array): array
-    {
-        foreach ($array as $key => $value) {
-            if (preg_match('/^\./', $key)) { // Remove hidden directory
-                unset($array[$key]);
-                continue;
-            }
-            if (is_array($array[$key])) { // Recurse through directories
-                $array[$key] = $this->removeHidden($array[$key]);
-            } elseif (preg_match('/^\./', $value)) { // Remove hidden file
-                unset($array[$key]);
-                continue;
-            }
-        }
-
-        return $array;
     }
 }
