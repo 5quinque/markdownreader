@@ -9,8 +9,10 @@
     <body>
         <div class="top-bar-container">
             <div class="top-bar">
-                <div class="branding"><img src="{{ asset('/brand.png') }}"></div>
-                <div class="search"><input type="text" placeholder="search"></div>
+                <div class="branding"><a href="{{ path('index') }}"><img src="{{ asset('/brand.png') }}"></a></div>
+                <div class="search">
+                {{ form(searchform, { 'attr': {'class': 'search_form'} }) }}
+                </div>
             </div>
         </div>
 

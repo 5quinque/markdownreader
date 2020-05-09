@@ -4,7 +4,7 @@
 {% endif %}
 {% for key,value in files %}
     {% if value is iterable %}
-        <li>
+    <li>
 <span role="button" 
  aria-expanded="true"
  data-toggle="collapse"
@@ -14,11 +14,11 @@
 </span>
 </li>
         {% set files = value %}
-        <div id="collapse{{ key }}" class="collapse show">
+    <div id="collapse{{ key }}" class="collapse show">
         {{ include('page/_navigation.html.twig') }}
-        </div>
+    </div>
     {% else %}
-      <li><a href="{{ path('note', {'directory': value, 'note' : key }) }}">{{ key }}</a></li>
+    <li><a href="{{ path('note', {'directory': value, 'note' : key }) }}">{{ key }}</a></li>
     {% endif %}
 {% endfor %}
 </ul>

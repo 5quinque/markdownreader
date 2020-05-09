@@ -5,21 +5,19 @@ class Search
 {
     public function __construct()
     {
+        $this->results = [];
     }
 
     public function searchTitles(string $searchterm, array $files)
     {
         foreach ($files as $key => $value) {
             if (is_array($value)) {
-                $returnValue = $this->searchTitles($searchterm, $value);
-                if ($returnValue != false) {
-                    return $returnValue;
-                }
-            } else {
-                if ($value == $searchterm) {
-                    return $value;
-                }
+                $this->searchTitles($searchterm, $value);
+            } elseif (preg_match("/{$searchterm}/", $key)) {
+                $this->results[] = [$value, $key];
             }
         }
+
+        return $this->results;
     }
 }

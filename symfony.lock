@@ -17,18 +17,6 @@
     "doctrine/lexer": {
         "version": "1.2.0"
     },
-    "easycorp/easy-log-handler": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "70062abc2cd58794d2a90274502f81b55cd9951b"
-        },
-        "files": [
-            "config/packages/dev/easy_log_handler.yaml"
-        ]
-    },
     "erusev/parsedown": {
         "version": "1.7.4"
     },
@@ -162,6 +150,9 @@
             ".env"
         ]
     },
+    "symfony/form": {
+        "version": "v5.0.8"
+    },
     "symfony/framework-bundle": {
         "version": "4.4",
         "recipe": {
@@ -196,6 +187,9 @@
     },
     "symfony/inflector": {
         "version": "v5.0.4"
+    },
+    "symfony/intl": {
+        "version": "v5.0.8"
     },
     "symfony/maker-bundle": {
         "version": "1.0",
@@ -238,6 +232,9 @@
             "config/packages/notifier.yaml"
         ]
     },
+    "symfony/options-resolver": {
+        "version": "v5.0.8"
+    },
     "symfony/phpunit-bridge": {
         "version": "4.3",
         "recipe": {
@@ -256,6 +253,9 @@
     },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.14.0"
+    },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.16.0"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.14.0"

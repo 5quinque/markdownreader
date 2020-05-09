@@ -2,13 +2,11 @@
 
 namespace App\Controller;
 
-// use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\Markdown;
-use App\Service\Search;
-
 use Symfony\Component\HttpFoundation\Response;
+use App\Service\Markdown;
+use App\Form\SearchMDType;
 
 class PageController extends AbstractController
 {
@@ -18,30 +16,22 @@ class PageController extends AbstractController
      */
     public function index(Markdown $md)
     {
+        $searchform = $this->createForm(SearchMDType::class, null, [
+            'action' => $this->generateUrl('search'),
+        ]);
+
         $files = $md->files;
         $dirPath = $md->findIndex();
 
         $markdown = $md->loadMarkdown($dirPath[0], $dirPath[1]);
 
         return $this->render('page/note.html.twig', [
+            'searchform' => $searchform->createView(),
             'directory' => $dirPath[0],
             'note' => $dirPath[1],
             'files' => $files,
             'markdown' => $markdown,
         ]);
-    }
-
-    /**
-     * @Route("/search/{searchterm}", name="search")
-     */
-    public function search(Markdown $md, Search $search, string $searchterm)
-    {
-        $files = $md->files;
-        $result = $search->searchTitles($searchterm, $files);
-
-        dump($result);
-
-        return $this->render('page/search.html.twig', ['files' => $files, 'searchterm' => $searchterm]);
     }
 
     /**
@@ -60,10 +50,14 @@ class PageController extends AbstractController
     }
 
     /**
-     * @Route("/{directory}/{note}", name="note", requirements={"directory"=".+"})
+     * @Route("/{directory}/{note}", name="note", requirements={"directory"="^(?!search|raw).*$"})
      */
     public function note(string $directory, string $note, Markdown $md)
     {
+        $searchform = $this->createForm(SearchMDType::class, null, [
+            'action' => $this->generateUrl('search'),
+        ]);
+
         $markdown = $md->loadMarkdown($directory, $note);
         $files = $md->files;
 
@@ -75,6 +69,7 @@ class PageController extends AbstractController
         }
         
         return $this->render('page/note.html.twig', [
+            'searchform' => $searchform->createView(),
             'directory' => $directory,
             'note' => $note,
             'files' => $files,

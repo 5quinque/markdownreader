@@ -1,38 +1,19 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Searching....{% endblock %}
-
+{% block title %}Searching: {{ searchterm }}{% endblock %}
 {% block body %}
+
 <div class="wrapper">
     <div class="search-results">
         <h2>Search: {{ searchterm }}</h2>
-
+{% for result in results %}
         <div class="result">
-            <div class="search-title">firewalld</div>
-            <div class="preview">Reject traffic from IP Address
-firewall-cmd --permanent --add-rich-rule="rule family='ipv4' source address='192.168.0.11' reject"</div>
+            <div class="search-title">{{ result[1] }}</div>
+            <div class="preview">Some document preview</div>
             <div class="markdown-path">
-                <a href="/notes/Computing/UNIX/Redhat/firewalld">Computing/UNIX/Redhat/firewalld</a>
+                <a href="{{ path('note', {'directory': result[0], 'note' : result[1] }) }}">{{ result[0] ~ '/' ~ result[1] }}</a>
             </div>
         </div>
-
-        <div class="result">
-            <div class="search-title">lvm</div>
-            <div class="markdown-path">
-                <a href="/notes/Computing/UNIX/Redhat/lvm">Computing/UNIX/Redhat/lvm</a>
-            </div>
-        </div>
-
-        <div class="result">
-            <div class="search-title">miscellaneous</div>
-            <div class="markdown-path">
-                <a href="/notes/Computing/UNIX/miscellaneous">Computing/UNIX/miscellaneous</a>
-            </div>
-        </div>
-
-
-
-
+{% endfor %}
     </div>
 </div>
 {% endblock %}
