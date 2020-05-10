@@ -15,7 +15,7 @@ class SearchMDType extends AbstractType
         $builder
             ->add('searchterm', SearchType::class, [
                 'label' => false,
-                'attr' => ['placeholder' => 'Search'],
+                'attr' => ['placeholder' => 'Search', 'autocomplete' => 'off'],
             ])
             ->add('Search', SubmitType::class, [
                 'attr' => ['class' => 'search'],

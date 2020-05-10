@@ -11,11 +11,12 @@
             <div class="top-bar">
                 <div class="branding"><a href="{{ path('index') }}"><img src="{{ asset('/brand.png') }}"></a></div>
                 <div class="search">
-                {{ form(searchform, { 'attr': {'class': 'search_form'} }) }}
+                    {{ form(searchform, { 'attr': {'class': 'search_form'} }) }}
+                    <div id="typeahead" class="typeahead hidden">
+                    </div>
                 </div>
             </div>
         </div>
-
         <div class="container">
             <div class="row">
                 <div class="column column-20 bgp">
@@ -27,6 +28,9 @@
             </div>
         </div>
         {% block javascripts %}{% endblock %}
+    <script>
+        let markdownFiles = JSON.parse('{{ files|json_encode|e('js') }}');
+    </script>
     <script src="{{ asset('/js/script.js') }}"></script>
     </body>
 </html>

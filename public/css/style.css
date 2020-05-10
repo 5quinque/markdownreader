@@ -123,7 +123,7 @@ form.search_form #search_md div {
     flex-wrap: nowrap;
     display: flex;
 }
-.top-bar .search input {
+.top-bar .search #search_md_searchterm {
     border: 1px solid #9b4dca;
     border-radius: 4px 0px 0px 4px;
     padding: 7px;
@@ -131,6 +131,7 @@ form.search_form #search_md div {
     color: #9b4dca;
     font-size: 13px;
     font-weight: 500;
+    width: 200px;
 }
 .top-bar .search #search_md_Search {
     border-radius: 0px 10px 10px 0px;
@@ -139,6 +140,22 @@ form.search_form #search_md div {
     padding-top: 8px;
     color: #f5f5ff;
     background-color: #9b4dca;
+    width: 100px;
+}
+
+.top-bar .search #search_md_Search:hover {
+    color: #9b4dca;
+    background-color: #f5f5ff;
+}
+
+.typeahead {
+    position: absolute;
+    background-color: #f5f5ff;
+    width: 280px;
+    padding: 10px;
+}
+.typeahead.hidden {
+    display: none;
 }
 
 .top-bar-left {
