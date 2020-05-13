@@ -56,12 +56,23 @@ function clearTypeahead() {
 
 function hideTypeahead() {
     let typeahead = document.getElementById("typeahead");
+    let input = document.getElementById("search_md_searchterm");
+    let button = document.getElementById("search_md_Search");
+
     typeahead.classList.add('hidden');
+    input.classList.remove('searching');
+    button.classList.remove('searching');
 }
 
 function showTypeahead() {
     let typeahead = document.getElementById("typeahead");
+    let input = document.getElementById("search_md_searchterm");
+    let button = document.getElementById("search_md_Search");
+    highlightPosition = 0;
+
     typeahead.classList.remove('hidden');
+    input.classList.add('searching');
+    button.classList.add('searching');
 }
 
 function searchTitles(searchterm, files, results = []) {
@@ -80,7 +91,68 @@ function searchTitles(searchterm, files, results = []) {
 }
 
 const searchField = document.getElementById('search_md_searchterm');
-
 searchField.addEventListener('input', typeahead);
 
+// Arrow keys on search input
+let highlightPosition = 0;
+document.addEventListener('keydown', handleSearchKeys);
 
+function handleSearchKeys(e) {
+    if (searchField !== document.activeElement) {
+        return false;
+    }
+
+    switch (e.code) {
+        case 'ArrowUp':
+            console.log('moveup');
+            selectTypeaheadUp();
+            break;
+        case 'ArrowDown':
+            console.log('movedown');
+            selectTypeaheadDown();
+            break;
+        case 'Enter':
+            e.preventDefault();
+            console.log('enter pressed');
+            clickHighlighted(); 
+            break;
+    }
+
+}
+
+function clickHighlighted() {
+    const typeahead = document.getElementById('typeahead');
+    const highlightedDiv = typeahead.getElementsByClassName('highlight');
+
+    if (highlightedDiv.length < 1) {
+        return false;
+    }
+
+    const anchor = highlightedDiv[0].firstChild;
+
+    window.location = anchor.href;
+}
+
+function selectTypeaheadUp() {
+    const typeaheadElement = document.getElementById('typeahead');
+
+    if (highlightPosition === 0) {
+        return false;
+    }
+
+    typeaheadElement.childNodes[highlightPosition].classList.remove('highlight')
+    highlightPosition--;
+    typeaheadElement.childNodes[highlightPosition].classList.add('highlight')
+}
+
+function selectTypeaheadDown() {
+    const typeaheadElement = document.getElementById('typeahead');
+
+    if (highlightPosition === typeaheadElement.childNodes.length - 1) {
+        return false;
+    }
+
+    typeaheadElement.childNodes[highlightPosition].classList.remove('highlight')
+    highlightPosition++;
+    typeaheadElement.childNodes[highlightPosition].classList.add('highlight')
+}

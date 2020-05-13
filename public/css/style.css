@@ -140,7 +140,7 @@ form.search_form #search_md div {
     padding-top: 8px;
     color: #f5f5ff;
     background-color: #9b4dca;
-    width: 100px;
+    width: 102px;
 }
 
 .top-bar .search #search_md_Search:hover {
@@ -148,14 +148,43 @@ form.search_form #search_md div {
     background-color: #f5f5ff;
 }
 
+/* typeahead */
+.top-bar .search #search_md_searchterm.searching {
+    border-radius: 4px 0px 0px 0px;
+}
+.top-bar .search #search_md_Search.searching {
+    border-radius: 0px 10px 0px 0px;
+}
+
 .typeahead {
     position: absolute;
     background-color: #f5f5ff;
     width: 280px;
     padding: 10px;
+    border: 1px solid #9b4dca;
+    border-radius: 0px 0px 3px 3px;
+    margin-top: -1px;
 }
 .typeahead.hidden {
     display: none;
+}
+.typeahead div {
+    border-bottom: 1px solid #9b4dca;
+}
+.typeahead div:last-child {
+    border-bottom: 0px;
+}
+.typeahead div a {
+    padding: 10px 0px;
+    display: block;
+}
+.typeahead div a:hover {
+    background-color: #9b4dca;
+    color: #f5f5ff;
+}
+.typeahead div.highlight a {
+    background-color: #9b4dca;
+    color: #f5f5ff;
 }
 
 .top-bar-left {
