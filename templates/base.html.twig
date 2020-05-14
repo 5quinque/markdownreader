@@ -27,10 +27,11 @@
                 </div>
             </div>
         </div>
-        {% block javascripts %}{% endblock %}
     <script>
         let markdownFiles = JSON.parse('{{ files|json_encode|e('js') }}');
     </script>
     <script src="{{ asset('/js/script.js') }}"></script>
+    <script src="{{ asset('/js/typeahead.js') }}"></script>
+    {% block javascripts %}{% endblock %}
     </body>
 </html>
