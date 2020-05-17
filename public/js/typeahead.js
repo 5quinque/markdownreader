@@ -103,8 +103,10 @@ function handleSearchKeys(e) {
                 e.preventDefault();
             }
             break;
+        case 'Escape':
+            removeHighlight(highlightPosition);
+            hideTypeahead();
     }
-
 }
 
 function clickHighlighted() {
