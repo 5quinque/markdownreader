@@ -14,6 +14,7 @@ class GitPull
 
     public function pull()
     {
+        // [TODO] Replace 'notes' with the git repository name
         chdir("{$this->markdownDirectory}/notes");
         $result = array();
         #exec("ls -l", $result);
