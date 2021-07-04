@@ -26,5 +26,10 @@ services:
       - ./logs:/var/log
     depends_on:
       - php-fpm
-    ports:
-      - "80:80"
+    # If you want to expose port 80 to the host
+    # ports:
+    #   - "80:80"
+
+networks:
+  default:
+    name: web
