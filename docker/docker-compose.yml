@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   php-fpm:
+    container_name: web-notes-php
     build:
       context: ./php-fpm
     environment:
@@ -13,6 +14,7 @@ services:
       - ../src:/var/www
 
   nginx:
+    container_name: web-notes-nginx
     build:
       context: ./nginx
     environment:
