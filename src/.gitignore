@@ -15,7 +15,7 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
-/markdown/
+/markdown/notes
 
 ###> phpunit/phpunit ###
 /phpunit.xml

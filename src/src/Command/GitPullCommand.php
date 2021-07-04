@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-Use App\Service\GitPull;
+Use App\Service\Git;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,7 +13,7 @@ class GitPullCommand extends Command
 
     private $service;
 
-    public function __construct(GitPull $service)
+    public function __construct(Git $service)
     {
         $this->service = $service;
 

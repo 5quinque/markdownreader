@@ -1,0 +1,1 @@
+2021/07/04 11:12:27 [warn] 31#31: *1 an upstream response is buffered to a temporary file /var/cache/nginx/fastcgi_temp/1/00/0000000001 while reading upstream, client: 172.18.0.1, server: localhost, request: "GET /raw/notes/RCDrift/.images/camber.jpg HTTP/1.1", upstream: "fastcgi://172.18.0.2:9000", host: "localhost", referrer: "http://localhost/notes/RCDrift/basics"
